@@ -1,0 +1,26 @@
+org: jadsonsanches
+app: serverless-scheduled-task
+service: serverless-scheduled-task
+
+frameworkVersion: '3'
+
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: sa-east-1
+
+functions:
+  rateHandler:
+    handler: handler.run
+    events:
+      # Invoke Lambda function every minute
+      - schedule: rate(1 minute)
+  # cronHandler:
+  #   handler: handler.run
+  #   events:
+  #     # Invoke Lambda function every 2nd minute from Mon-Fri
+  #     - schedule: cron(0/2 * ? * MON-FRI *)
+
+plugins:
+  - serverless-offline
